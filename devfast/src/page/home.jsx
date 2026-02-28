@@ -26,7 +26,7 @@ export default function DevfastLanding() {
     { label: "Services", ref: servicesRef },
     { label: "Projects", ref: projectsRef },
     { label: "Contact", ref: contactRef },
-    { label: "Developer", ref: null }, // special case
+    { label: "Developer", ref: null }, 
   ];
 
   const handleScroll = (sec) => {
