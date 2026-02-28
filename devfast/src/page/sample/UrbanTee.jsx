@@ -1,4 +1,4 @@
-import React, { useState, useRef} from "react";
+import React, { useState, useEffect, useRef} from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
@@ -8,6 +8,7 @@ import { ArrowLeft } from "lucide-react";
 const DescriptionWithToggle = ({ text, limit = 180 }) => {
   const [showFull, setShowFull] = useState(false);
   const isLong = text.length > limit;
+ 
 
  
 
@@ -35,6 +36,27 @@ const UrbanTeeLanding = () => {
    const navigate = useNavigate();
 
   const collectionRef = useRef(null);
+
+   const [devfastModal, setDevfastModal] = useState(false);
+   const [isPreviewMode, setIsPreviewMode] = useState(false);
+   const [isEditingMode, setIsEditingMode] = useState(false);
+const [editingField, setEditingField] = useState(null);
+const [tempValue, setTempValue] = useState("");
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setDevfastModal(true);
+  }, 10000); // 10 seconds
+
+  return () => clearTimeout(timer);
+}, []);
+
+const [businessData, setBusinessData] = useState({
+  businessName: "URBANTEE",
+  tagline: "Minimal. Timeless. Elevated.",
+  heroImage: "/urbantee/urban16.png",
+  collection: "THE COLLECTION",
+});
 
 
   const scrollToCollection = () => {
@@ -66,9 +88,15 @@ const UrbanTeeLanding = () => {
     <div className="bg-black text-white font-sans overflow-x-hidden scroll-smooth">
 {/* ================= HERO ================= */}
 <section
-  className="relative min-h-screen flex flex-col md:flex-row items-center justify-center text-center md:text-center px-6"
+  onClick={() => {
+    if (!isEditingMode) return;
+    setEditingField("heroImage");
+    setTempValue(businessData.heroImage);
+  }}
+  className={`relative min-h-screen flex flex-col md:flex-row items-center justify-center text-center px-6
+    ${isEditingMode ? "border-4 border-yellow-400 cursor-pointer" : ""}`}
   style={{
-    backgroundImage: "url('/urbantee/urban16.png')",
+    backgroundImage: `url(${businessData.heroImage})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundAttachment: "fixed",
@@ -89,12 +117,31 @@ const UrbanTeeLanding = () => {
     transition={{ duration: 1 }}
     className="relative z-10 max-w-4xl flex flex-col items-center md:items-center"
   >
-    <h1 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-[0.2em] mb-6">
-      URBANTEE
-    </h1>
-    <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-10 max-w-xl">
-      Minimal. Timeless. Elevated.
-    </p>
+
+    <h1
+  onClick={(e) => {
+    e.stopPropagation();
+    if (!isEditingMode) return;
+    setEditingField("businessName");
+    setTempValue(businessData.businessName);
+  }}
+  className={`text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-[0.2em] mb-6
+  ${isEditingMode ? "border-2 border-yellow-400 cursor-pointer hover:bg-yellow-400/10" : ""}`}
+>
+  {businessData.businessName}
+</h1>
+    <p
+  onClick={(e) => {
+    e.stopPropagation();
+    if (!isEditingMode) return;
+    setEditingField("tagline");
+    setTempValue(businessData.tagline);
+  }}
+  className={`text-lg sm:text-xl md:text-2xl text-gray-300 mb-10 max-w-xl
+  ${isEditingMode ? "border-2 border-yellow-400 cursor-pointer hover:bg-yellow-400/10" : ""}`}
+>
+  {businessData.tagline}
+</p>
     <button
   onClick={scrollToCollection}
   className="bg-white text-black px-8 sm:px-10 py-3 sm:py-4 rounded-full font-semibold hover:scale-105 transition shadow-2xl"
@@ -104,10 +151,114 @@ const UrbanTeeLanding = () => {
   </motion.div>
 </section>
 
+{/*
+for notify to user to get this like website
+*/}
+
+{devfastModal && (
+  <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+    <div className="bg-white text-black p-8 rounded-2xl text-center max-w-md">
+      <h2 className="text-2xl font-bold mb-4">
+        Do you want this design for your business?
+      </h2>
+      <button
+        onClick={() => {
+          setDevfastModal(false);
+          setIsEditingMode(true);
+        }}
+        className="bg-black text-white px-6 py-2 rounded-full mr-4"
+      >
+        Yes
+      </button>
+      <button
+        onClick={() => setDevfastModal(false)}
+        className="border px-6 py-2 rounded-full"
+      >
+        No
+      </button>
+    </div>
+  </div>
+)}
+
+
+{/*
+shw form if lick edit
+*/}
+
+{editingField && (
+  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+    <div className="bg-white text-black p-6 rounded-2xl w-full max-w-md">
+      <h2 className="text-lg font-bold mb-4">Edit Content</h2>
+
+      <input
+        type="text"
+        value={tempValue}
+        onChange={(e) => setTempValue(e.target.value)}
+        className="w-full border p-2 mb-4"
+      />
+
+      <button
+        onClick={() => {
+          setBusinessData({
+            ...businessData,
+            [editingField]: tempValue,
+          });
+          setEditingField(null);
+        }}
+        className="bg-black text-white px-6 py-2 rounded-full"
+      >
+        OK
+      </button>
+    </div>
+  </div>
+)}
+
+{isEditingMode && !isPreviewMode && (
+  <button
+    onClick={() => {
+      setIsEditingMode(false);
+      setIsPreviewMode(true);
+    }}
+    className="fixed top-24 right-6 bg-white text-black px-6 py-3 rounded-full shadow-xl hover:scale-105 transition z-50"
+  >
+    Preview
+  </button>
+)}
+
+{isPreviewMode && (
+  <button
+    onClick={() => {
+      setIsPreviewMode(false);
+      setIsEditingMode(true);
+    }}
+    className="fixed top-24 right-6 bg-white text-black px-6 py-3 rounded-full shadow-xl z-50"
+  >
+    Edit Again
+  </button>
+)}
+
+
+{isPreviewMode && (
+  <motion.button
+    initial={{ opacity: 0, x: 50 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.5 }}
+    onClick={() => window.location.href = "/checkout"}
+    className="fixed top-6 right-6 bg-yellow-400 text-black px-6 py-3 rounded-full font-semibold shadow-2xl hover:scale-105 transition z-50"
+  >
+    Publish Website – ₱5,999
+  </motion.button>
+)}
+
      {/* ================= COLLECTION ================= */}
 <section ref={collectionRef} className="py-32 px-6">
-  <h2 className="text-5xl font-bold text-center mb-24 tracking-widest">
-    THE COLLECTION
+  <h2 className={`text-5xl font-bold text-center mb-24 tracking-widest  ${isEditingMode ? "border-2 border-yellow-400 cursor-pointer hover:bg-yellow-400/10" : ""}`} onClick={(e) => {
+    e.stopPropagation();
+    if (!isEditingMode) return;
+    setEditingField("collection");
+    setTempValue(businessData.collection);
+  }}>
+    {businessData.collection}
   </h2>
 
   <div className="max-w-7xl mx-auto space-y-40">
@@ -148,10 +299,28 @@ const UrbanTeeLanding = () => {
               isReversed ? "md:order-1" : ""
             } order-2 flex flex-col justify-center`}
           >
-            <h3 className="text-3xl md:text-4xl font-bold mb-4">{product.name}</h3>
-            <p className="text-gray-400 mb-4 line-clamp-4 md:line-clamp-none">
-              {product.desc}
-            </p>
+           <h3
+  className={`text-3xl md:text-4xl font-bold mb-4 ${isEditingMode ? "border-2 border-yellow-400 cursor-pointer hover:bg-yellow-400/10" : ""}`}
+  onClick={(e) => {
+    e.stopPropagation();
+    if (!isEditingMode) return;
+    setEditingField(`product-name-${product.id}`);
+    setTempValue(product.name);
+  }}
+>
+  {product.name}
+</h3>
+
+<p  className={`text-gray-400 mb-4 line-clamp-4 md:line-clamp-none ${isEditingMode ? "border-2 border-yellow-400 cursor-pointer hover:bg-yellow-400/10" : ""}`}
+  onClick={(e) => {
+    e.stopPropagation();
+    if (!isEditingMode) return;
+    setEditingField(`product-desc-${product.id}`);
+    setTempValue(product.desc);
+  }}
+>
+  {product.desc}
+</p>
             <button
               className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:scale-105 transition self-start"
               onClick={() => openModal(product)}
