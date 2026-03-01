@@ -43,13 +43,41 @@ const UrbanTeeLanding = () => {
 const [editingField, setEditingField] = useState(null);
 const [tempValue, setTempValue] = useState("");
 
-useEffect(() => {
-  const timer = setTimeout(() => {
-    setDevfastModal(true);
-  }, 10000); // 10 seconds
+const [userResponse, setUserResponse] = useState(null);
+  const timerRef = useRef(null);
+  const attemptRef = useRef(0); 
 
-  return () => clearTimeout(timer);
-}, []);
+  const delays = [10000, 15000, 20000, 40000, 60000];
+
+useEffect(() => {
+    const scheduleNotification = () => {
+      if (attemptRef.current >= delays.length) return; // stop after last attempt
+      timerRef.current = setTimeout(() => {
+        setDevfastModal(true);
+      }, delays[attemptRef.current]);
+    };
+
+    scheduleNotification();
+
+    return () => clearTimeout(timerRef.current);
+  }, []);
+
+  const handleUserResponse = (response) => {
+    setDevfastModal(false);
+    setUserResponse(response);
+
+    if (response === "no") {
+      attemptRef.current += 1; // next delay
+      if (attemptRef.current < delays.length) {
+        timerRef.current = setTimeout(() => {
+          setDevfastModal(true);
+        }, delays[attemptRef.current]);
+      }
+    } else if (response === "yes") {
+      // reset attempts if user says yes
+      attemptRef.current = 0;
+    }
+  };
 
 const [businessData, setBusinessData] = useState({
   businessName: "URBANTEE",
@@ -193,13 +221,17 @@ for notify to user to get this like website
         onClick={() => {
           setDevfastModal(false);
           setIsEditingMode(true);
+          handleUserResponse("yes");
         }}
         className="bg-black text-white px-6 py-2 rounded-full mr-4"
       >
         Yes
       </button>
       <button
-        onClick={() => setDevfastModal(false)}
+        onClick={() => {
+          setDevfastModal(false);
+          handleUserResponse("no");
+        }}
         className="border px-6 py-2 rounded-full"
       >
         No
@@ -301,6 +333,28 @@ else if (editingField === "hero-image") {
       )
     }));
   }
+
+  else if (editingField?.startsWith("product-name-")) {
+  const id = parseInt(editingField.replace("product-name-", ""));
+
+  setBusinessData(prev => ({
+    ...prev,
+    products: prev.products.map(p =>
+      p.id === id ? { ...p, name: tempValue } : p
+    )
+  }));
+}
+
+else if (editingField?.startsWith("product-desc-")) {
+  const id = parseInt(editingField.replace("product-desc-", ""));
+
+  setBusinessData(prev => ({
+    ...prev,
+    products: prev.products.map(p =>
+      p.id === id ? { ...p, desc: tempValue } : p
+    )
+  }));
+}
 
 
 else {
