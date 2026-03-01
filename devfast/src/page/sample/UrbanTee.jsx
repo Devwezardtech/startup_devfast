@@ -48,50 +48,41 @@ const [showCheckout, setShowCheckout] = useState(false);
 const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
 const [customDomain, setCustomDomain] = useState("");
 
-const [userResponse, setUserResponse] = useState(null);
+
   const timerRef = useRef(null);
   const attemptRef = useRef(0); 
 
   const delays = [5000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];
 
 useEffect(() => {
-    const scheduleNotification = () => {
-      if (attemptRef.current >= delays.length) return; // stop after last attempt
-      timerRef.current = setTimeout(() => {
-        setDevfastModal(true);
-      }, delays[attemptRef.current]);
-    };
+  const scheduleNotification = () => {
+    if (attemptRef.current >= delays.length) return; // stop after last attempt
+    timerRef.current = setTimeout(() => {
+      setDevfastModal(true);
+    }, delays[attemptRef.current]);
+  };
 
-    scheduleNotification();
+  scheduleNotification();
 
-    return () => clearTimeout(timerRef.current);
-  }, []);
+  return () => clearTimeout(timerRef.current);
+}, []);
 
-  useEffect(() => {
-  if (userResponse === "yes") {
-    console.log("User accepted the design! Proceed to editing mode or checkout.");
-    // you can auto-open editor or enable features
-  } else if (userResponse === "no") {
-    console.log("User postponed. Will retry notification later.");
-  }
-}, [userResponse]);
 
   const handleUserResponse = (response) => {
-    setDevfastModal(false);
-    setUserResponse(response);
-
-    if (response === "no") {
-      attemptRef.current += 1; // next delay
-      if (attemptRef.current < delays.length) {
-        timerRef.current = setTimeout(() => {
-          setDevfastModal(true);
-        }, delays[attemptRef.current]);
-      }
-    } else if (response === "yes") {
-      // reset attempts if user says yes
-      attemptRef.current = 0;
+  setDevfastModal(false);
+  
+  if (response === "no") {
+    console.log("User postponed. Will retry later.");
+    attemptRef.current += 1;
+    if (attemptRef.current < delays.length) {
+      timerRef.current = setTimeout(() => setDevfastModal(true), delays[attemptRef.current]);
     }
-  };
+  } else if (response === "yes") {
+    console.log("User accepted the design!");
+    attemptRef.current = 0;
+    setIsEditingMode(true);
+  }
+};
 
 const [businessData, setBusinessData] = useState({
   businessName: "URBANTEE",
