@@ -473,8 +473,8 @@ shw form if lick edit
       </p>
 
       <input
-        type="Website"
-        placeholder="https://yourbusiness.com"
+        type="text"
+        placeholder="https://yourbusinessname.com"
         value={customDomain}
         onChange={(e) => setCustomDomain(e.target.value)}
         required
