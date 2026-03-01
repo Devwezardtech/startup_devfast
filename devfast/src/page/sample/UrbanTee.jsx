@@ -84,6 +84,7 @@ const [businessData, setBusinessData] = useState({
   tagline: "Minimal. Timeless. Elevated.",
   heroImage: "/urbantee/urban16.png",
   collection: "THE COLLECTION",
+  footerName: "UrbanTee",
 
 
 
@@ -248,125 +249,152 @@ shw form if lick edit
 {editingField && (
   <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
     <div className="bg-white text-black p-6 rounded-2xl w-full max-w-md">
-      <h2 className="text-lg font-bold mb-4">Edit Content</h2>
+      <h2 className="text-lg font-bold mb-4">
+        {editingField === "new-product"
+          ? "Add New Product"
+          : "Edit Content"}
+      </h2>
 
-     {editingField?.includes("front") || editingField?.includes("back") ||
- editingField?.includes("image") ? (
-  <input
-    type="file"
-    accept="image/*"
-    onChange={(e) => {
-      const file = e.target.files[0];
-      if (!file) return;
+      {/* NEW PRODUCT MODE  */}
+      {editingField === "new-product" ? (
+        <>
+          {/* IMAGE */}
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (!file) return;
 
-      const imageUrl = URL.createObjectURL(file);
-      setTempValue(imageUrl);
-    }}
-    className="w-full border p-2 mb-4"
-  />
-) : editingField?.includes("desc") ? (
-  <textarea
-    value={tempValue}
-    onChange={(e) => setTempValue(e.target.value)}
-    className="w-full border p-2 mb-4 h-32"
-  />
-) : (
-  <input
-    type="text"
-    value={tempValue}
-    onChange={(e) => setTempValue(e.target.value)}
-    className="w-full border p-2 mb-4"
-  />
-)}
+              const imageUrl = URL.createObjectURL(file);
+              setTempValue((prev) => ({ ...prev, image: imageUrl }));
+            }}
+            className="w-full border p-2 mb-4"
+          />
 
+          {/* NAME */}
+          <input
+            type="text"
+            placeholder="Product Name"
+            value={tempValue.name}
+            onChange={(e) =>
+              setTempValue((prev) => ({ ...prev, name: e.target.value }))
+            }
+            className="w-full border p-2 mb-4"
+          />
+
+          {/* DESC */}
+          <textarea
+            placeholder="Product Description"
+            value={tempValue.desc}
+            onChange={(e) =>
+              setTempValue((prev) => ({ ...prev, desc: e.target.value }))
+            }
+            className="w-full border p-2 mb-4 h-32"
+          />
+        </>
+      ) : (
+        <>
+          {/* NORMAL EDIT MODE */}
+
+          {editingField?.includes("image") ? (
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const imageUrl = URL.createObjectURL(file);
+                setTempValue(imageUrl);
+              }}
+              className="w-full border p-2 mb-4"
+            />
+          ) : editingField?.includes("desc") ? (
+            <textarea
+              value={tempValue}
+              onChange={(e) => setTempValue(e.target.value)}
+              className="w-full border p-2 mb-4 h-32"
+            />
+          ) : (
+            <input
+              type="text"
+              value={tempValue}
+              onChange={(e) => setTempValue(e.target.value)}
+              className="w-full border p-2 mb-4"
+            />
+          )}
+        </>
+      )}
+
+      {/* OK BUTTON */}
       <button
         onClick={() => {
+          /* ADD NEW PRODUCT */
+          if (editingField === "new-product") {
+            if (!tempValue.image || !tempValue.name || !tempValue.desc) {
+              alert("Please complete all fields.");
+              return;
+            }
 
-  if (editingField?.startsWith("product-image-")) {
-  const id = parseInt(editingField.replace("product-image-", ""));
+            setBusinessData((prev) => ({
+              ...prev,
+              products: [...prev.products, tempValue],
+            }));
+          }
 
-  setBusinessData(prev => ({
-    ...prev,
-    products: prev.products.map(p =>
-      p.id === id ? { ...p, image: tempValue } : p
-    )
-  }));
-}
+          /* EDIT PRODUCT IMAGE */
+          else if (editingField?.startsWith("product-image-")) {
+            const id = parseInt(
+              editingField.replace("product-image-", "")
+            );
 
-else if (editingField === "hero-image") {
-  setBusinessData(prev => ({
-    ...prev,
-    heroImage: tempValue
-  }));
-}
+            setBusinessData((prev) => ({
+              ...prev,
+              products: prev.products.map((p) =>
+                p.id === id ? { ...p, image: tempValue } : p
+              ),
+            }));
+          }
 
- else if (editingField?.startsWith("feature-image-")) {
-    const id = parseInt(editingField.replace("feature-image-", ""));
+          /* EDIT PRODUCT NAME */
+          else if (editingField?.startsWith("product-name-")) {
+            const id = parseInt(
+              editingField.replace("product-name-", "")
+            );
 
-    setBusinessData(prev => ({
-      ...prev,
-      featureSections: prev.featureSections.map(s =>
-        s.id === id ? { ...s, image: tempValue } : s
-      )
-    }));
-  }
+            setBusinessData((prev) => ({
+              ...prev,
+              products: prev.products.map((p) =>
+                p.id === id ? { ...p, name: tempValue } : p
+              ),
+            }));
+          }
 
-  else if (editingField?.startsWith("feature-title-")) {
-    const id = parseInt(editingField.replace("feature-title-", ""));
+          /* EDIT PRODUCT DESC */
+          else if (editingField?.startsWith("product-desc-")) {
+            const id = parseInt(
+              editingField.replace("product-desc-", "")
+            );
 
-    setBusinessData(prev => ({
-      ...prev,
-      featureSections: prev.featureSections.map(s =>
-        s.id === id ? { ...s, title: tempValue } : s
-      )
-    }));
-  }
+            setBusinessData((prev) => ({
+              ...prev,
+              products: prev.products.map((p) =>
+                p.id === id ? { ...p, desc: tempValue } : p
+              ),
+            }));
+          }
 
+          /* NORMAL FIELD */
+          else {
+            setBusinessData((prev) => ({
+              ...prev,
+              [editingField]: tempValue,
+            }));
+          }
 
-  else if (editingField?.startsWith("feature-desc-")) {
-    const id = parseInt(editingField.replace("feature-desc-", ""));
-
-    setBusinessData(prev => ({
-      ...prev,
-      featureSections: prev.featureSections.map(s =>
-        s.id === id ? { ...s, desc: tempValue } : s
-      )
-    }));
-  }
-
-  else if (editingField?.startsWith("product-name-")) {
-  const id = parseInt(editingField.replace("product-name-", ""));
-
-  setBusinessData(prev => ({
-    ...prev,
-    products: prev.products.map(p =>
-      p.id === id ? { ...p, name: tempValue } : p
-    )
-  }));
-}
-
-else if (editingField?.startsWith("product-desc-")) {
-  const id = parseInt(editingField.replace("product-desc-", ""));
-
-  setBusinessData(prev => ({
-    ...prev,
-    products: prev.products.map(p =>
-      p.id === id ? { ...p, desc: tempValue } : p
-    )
-  }));
-}
-
-
-else {
-    // normal fields like businessName, tagline, collection, heroImage
-    setBusinessData(prev => ({
-      ...prev,
-      [editingField]: tempValue
-    }));
-  }
-
-  setEditingField(null);
-}}
+          setEditingField(null);
+        }}
         className="bg-black text-white px-6 py-2 rounded-full"
       >
         OK
@@ -496,12 +524,38 @@ else {
             </button>
           </div>
         </motion.div>
+        
       );
     })}
   </div>
+  {isEditingMode && (
+  <div className="text-center mt-12">
+    <button
+      className="bg-yellow-400 text-black px-6 py-3 rounded-full font-bold hover:scale-105 transition"
+      onClick={() => {
+        // create a temporary new product object
+        const newId =
+          businessData.products.length > 0
+            ? Math.max(...businessData.products.map(p => p.id)) + 1
+            : 1;
+
+        setTempValue({
+          id: newId,
+          image: "",
+          name: "",
+          desc: "",
+        });
+
+        setEditingField("new-product"); 
+      }}
+    >
+      + Add Product
+    </button>
+  </div>
+)}
 </section>
 
-    {/* ================= MODAL ================= */}
+    {/*  MODAL  */}
       {modalOpen && selectedProduct && (
         <div
           className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 md:p-6 overflow-auto"
@@ -626,9 +680,21 @@ else {
   </section>
 ))}
 
-      <footer className="border-t border-white/10 py-4 text-center text-gray-500">
-        © 2026 UrbanTee. All Rights Reserved.
-      </footer>
+      <footer
+  className={`border-t border-white/10 py-4 text-center text-gray-500 ${
+    isEditingMode
+      ? "border-2 border-yellow-400 cursor-pointer hover:bg-yellow-400/10"
+      : ""
+  }`}
+  onClick={(e) => {
+    e.stopPropagation();
+    if (!isEditingMode) return;
+    setEditingField("footerName");
+    setTempValue(businessData.footerName);
+  }}
+>
+  © {new Date().getFullYear()} {businessData.footerName}. All Rights Reserved.
+</footer>
 
     </div>
   );
