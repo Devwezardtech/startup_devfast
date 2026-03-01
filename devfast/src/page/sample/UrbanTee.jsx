@@ -50,7 +50,7 @@ const [userResponse, setUserResponse] = useState(null);
   const timerRef = useRef(null);
   const attemptRef = useRef(0); 
 
-  const delays = [10000, 15000, 20000, 40000, 60000];
+  const delays = [5000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];
 
 useEffect(() => {
     const scheduleNotification = () => {
@@ -224,22 +224,23 @@ for notify to user to get this like website
       <button
         onClick={() => {
           setDevfastModal(false);
-          setIsEditingMode(true);
-          handleUserResponse("yes");
+          handleUserResponse("no");
         }}
-        className="bg-black text-white px-6 py-2 rounded-full mr-4"
+        className="border px-6 py-2 rounded-full mr-4"
       >
-        Yes
+        Later
       </button>
       <button
         onClick={() => {
           setDevfastModal(false);
-          handleUserResponse("no");
+          setIsEditingMode(true);
+          handleUserResponse("yes");
         }}
-        className="border px-6 py-2 rounded-full"
+        className="bg-black text-white px-6 py-2 rounded-full"
       >
-        No
+        Yes
       </button>
+      
     </div>
   </div>
 )}
@@ -495,7 +496,7 @@ shw form if lick edit
             // Optional: store domain before redirect
             localStorage.setItem("pendingDomain", customDomain);
 
-            window.location.href = "/project/urbanTee";
+            navigate("/project/checkout");  
           }}
           className="bg-yellow-400 text-gray-700 px-6 py-3 rounded-full font-semibold hover:scale-105 transition"
         >

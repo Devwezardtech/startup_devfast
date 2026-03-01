@@ -13,6 +13,7 @@ import InkMasterLanding from "./page/sample/Inkmaster";
 import UrbanTeeLanding from "./page/sample/UrbanTee";
 import DonLeoFitnessLanding from "./page/sample/DonLeoFitness";
 import PrimeNestRealtyLanding from "./page/sample/PrimeNestRealty";
+import Checkout from "./page/Urbantee/Checkout";
 
 
 export default function App() {
@@ -34,6 +35,7 @@ export default function App() {
       <Route path="/project/urbanTee" element={<UrbanTeeLanding />} />
       <Route path="/project/donLeoFitness" element={<DonLeoFitnessLanding />} />
       <Route path="/project/primeNestRealty" element={<PrimeNestRealtyLanding />} />
+      <Route path="/project/checkout" element={<Checkout />} />
       
     
 
