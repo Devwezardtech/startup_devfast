@@ -30,6 +30,8 @@ const DescriptionWithToggle = ({ text, limit = 180 }) => {
   );
 };
 
+ const delays = [5000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];
+
 const UrbanTeeLanding = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -52,7 +54,8 @@ const [customDomain, setCustomDomain] = useState("");
   const timerRef = useRef(null);
   const attemptRef = useRef(0); 
 
-  const delays = [5000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];
+ 
+
 
 useEffect(() => {
   const scheduleNotification = () => {
@@ -67,10 +70,9 @@ useEffect(() => {
   return () => clearTimeout(timerRef.current);
 }, []);
 
-
-  const handleUserResponse = (response) => {
+const handleUserResponse = (response) => {
   setDevfastModal(false);
-  
+
   if (response === "no") {
     console.log("User postponed. Will retry later.");
     attemptRef.current += 1;
