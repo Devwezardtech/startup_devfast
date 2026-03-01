@@ -43,6 +43,9 @@ const UrbanTeeLanding = () => {
 const [editingField, setEditingField] = useState(null);
 const [tempValue, setTempValue] = useState("");
 
+const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
+const [customDomain, setCustomDomain] = useState("");
+
 const [userResponse, setUserResponse] = useState(null);
   const timerRef = useRef(null);
   const attemptRef = useRef(0); 
@@ -343,6 +346,19 @@ shw form if lick edit
             }));
           }
 
+          else if (editingField === "hero-image") { setBusinessData(prev => ({ ...prev, heroImage: tempValue })); }
+
+          else if (editingField?.startsWith("feature-image-"))
+             { const id = parseInt(editingField.replace("feature-image-", "")); 
+              setBusinessData(prev => ({ ...prev, featureSections: prev.featureSections.map(s => s.id === id ? { ...s, image: tempValue } : s ) })); }
+
+          else if (editingField?.startsWith("feature-title-"))
+             { const id = parseInt(editingField.replace("feature-title-", "")); 
+              setBusinessData(prev => ({ ...prev, featureSections: prev.featureSections.map(s => s.id === id ? { ...s, title: tempValue } : s ) })); }
+
+          else if (editingField?.startsWith("feature-desc-"))
+             { const id = parseInt(editingField.replace("feature-desc-", "")); setBusinessData(prev => ({ ...prev, featureSections: prev.featureSections.map(s => s.id === id ? { ...s, desc: tempValue } : s ) })); }
+
           /* EDIT PRODUCT IMAGE */
           else if (editingField?.startsWith("product-image-")) {
             const id = parseInt(
@@ -403,6 +419,7 @@ shw form if lick edit
   </div>
 )}
 
+
 {isEditingMode && !isPreviewMode && (
   <button
     onClick={() => {
@@ -433,11 +450,61 @@ shw form if lick edit
     initial={{ opacity: 0, x: 50 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.5 }}
-    onClick={() => window.location.href = "/checkout"}
+    onClick={() => setIsPublishModalOpen(true)}
     className="fixed top-6 right-6 bg-yellow-400 text-black px-6 py-3 rounded-full font-semibold shadow-2xl hover:scale-105 transition z-50"
   >
     Publish Website – ₱5,999
   </motion.button>
+)}
+
+{isPublishModalOpen && (
+  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+    <div className="bg-white text-black p-8 rounded-2xl w-full max-w-md">
+
+      <h2 className="text-2xl font-bold mb-4">
+        Launch Your Website 🚀
+      </h2>
+
+      <p className="text-gray-600 mb-4 text-sm">
+        Enter your preferred domain name.
+      </p>
+
+      <input
+        type="text"
+        placeholder="https://yourbusiness.com"
+        value={customDomain}
+        onChange={(e) => setCustomDomain(e.target.value)}
+        className="w-full border p-3 rounded-lg mb-6"
+      />
+
+      <div className="flex justify-between items-center">
+        <button
+          onClick={() => setIsPublishModalOpen(false)}
+          className="text-gray-500"
+        >
+          Cancel
+        </button>
+
+        <button
+          onClick={() => {
+            if (!customDomain) {
+              alert("Please enter a domain name.");
+              return;
+            }
+
+            // Optional: store domain before redirect
+            localStorage.setItem("pendingDomain", customDomain);
+
+            window.location.href = "/project/urbanTee";
+          }}
+          className="bg-yellow-400 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition"
+        >
+          Launch Now – ₱5,999
+        </button>
+      </div>
+
+    </div>
+  </div>
 )}
 
      {/* ================= COLLECTION ================= */}
