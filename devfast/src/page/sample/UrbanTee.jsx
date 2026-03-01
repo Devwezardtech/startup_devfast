@@ -67,6 +67,15 @@ useEffect(() => {
     return () => clearTimeout(timerRef.current);
   }, []);
 
+  useEffect(() => {
+  if (userResponse === "yes") {
+    console.log("User accepted the design! Proceed to editing mode or checkout.");
+    // you can auto-open editor or enable features
+  } else if (userResponse === "no") {
+    console.log("User postponed. Will retry notification later.");
+  }
+}, [userResponse]);
+
   const handleUserResponse = (response) => {
     setDevfastModal(false);
     setUserResponse(response);
