@@ -56,15 +56,12 @@ const [businessData, setBusinessData] = useState({
   tagline: "Minimal. Timeless. Elevated.",
   heroImage: "/urbantee/urban16.png",
   collection: "THE COLLECTION",
-});
 
 
-  const scrollToCollection = () => {
-  collectionRef.current?.scrollIntoView({ behavior: "smooth" });
-};
+
   
 
-  const products = [
+  products: [
     { id: 1, name: "UA Premium Hoodie V3.0 - Midnight Black", front: "/urbantee/urban1.png", back: "/urbantee/urban2.png", desc: "Heavyweight Fleece, 500GSM, Double Layered Hood, Embroidered, Old English design, TopGrade Rubber Print, Luxurious Comfort, Front Pockets, Labelled Tags, Rubber Patching, New Cracked Back Print" },
     { id: 2, name: "UA Premium Hoodie V3.0 - Moon Grey", front: "/urbantee/urban3.png", back: "/urbantee/urban4.png", desc: "Heavyweight Fleece, 500GSM, Double Layered Hood, Embroidered, Old English design, TopGrade Rubber Print, Luxurious Comfort, Front Pockets, Labelled Tags, Rubber Patching, New Cracked Back Print"},
     { id: 3, name: "UA Prime F.C.O. Hoodies Black", front: "/urbantee/urban5.png", back: "/urbantee/urban6.png", desc: "Heavyweight Fleece, 500GSM, Double Layered Hood, Embroidered, Old English design, TopGrade Rubber Print, Luxurious Comfort, Front Pockets, Labelled Tags, Rubber Patching, New Cracked Back Print"},
@@ -72,7 +69,14 @@ const [businessData, setBusinessData] = useState({
     { id: 5, name: "UA Plain Sweat Pants - Top Dye Grey", front: "/urbantee/urban10.png", back: "/urbantee/urban11.png", desc: "Elevate your casual wardrobe with the UA Plain Sweat Pants - Fleece Fabric | Top Dye Grey, designed for comfort and style." },
     { id: 6, name: "UA Prime F.C.O. Sweat Pants Black", front: "/urbantee/urban12.png", back: "/urbantee/urban12.png", desc: "Structured cotton silhouette with a clean modern finish."},
 { id: 7, name: "UA PRIME SHIRTS - F.C.O. White", front: "/urbantee/urban14.png", back: "/urbantee/urban15.png", desc: "Proudly crafted in Cebu City, Philippines. Available in 2 colorways. 310GSM pure cotton – substantial yet refined softness. Pre-shrunk, shrink-free construction for a consistent fit. Modern tailored cut with a sleek, versatile silhouette. Classic crew neck – timeless and resilient against wear. Front Premium rubber print – durable, crack- and peel-resistant finish. Engineered for breathability and all-day luxurious comfort. UA signature label – a mark of authenticity and Filipino pride. Part of the Back to Basic Collection – A limited release of essentials. Silkscreen back print - heat-cured for strong wash resistance, helping prevent premature fading and keeping the print looking premium over time." },
-  ];
+  ],
+
+  });
+
+  
+  const scrollToCollection = () => {
+  collectionRef.current?.scrollIntoView({ behavior: "smooth" });
+};
 
   const openModal = (product) => {
     setSelectedProduct(product);
@@ -199,12 +203,37 @@ shw form if lick edit
 
       <button
         onClick={() => {
-          setBusinessData({
-            ...businessData,
-            [editingField]: tempValue,
-          });
-          setEditingField(null);
-        }}
+
+  if (editingField?.startsWith("product-name-")) {
+    const id = parseInt(editingField.replace("product-name-", ""));
+
+    setBusinessData(prev => ({
+      ...prev,
+      products: prev.products.map(p =>
+        p.id === id ? { ...p, name: tempValue } : p
+      )
+    }));
+
+  } else if (editingField?.startsWith("product-desc-")) {
+    const id = parseInt(editingField.replace("product-desc-", ""));
+
+    setBusinessData(prev => ({
+      ...prev,
+      products: prev.products.map(p =>
+        p.id === id ? { ...p, desc: tempValue } : p
+      )
+    }));
+
+  } else {
+    // normal fields like businessName, tagline, collection, heroImage
+    setBusinessData(prev => ({
+      ...prev,
+      [editingField]: tempValue
+    }));
+  }
+
+  setEditingField(null);
+}}
         className="bg-black text-white px-6 py-2 rounded-full"
       >
         OK
@@ -262,7 +291,7 @@ shw form if lick edit
   </h2>
 
   <div className="max-w-7xl mx-auto space-y-40">
-    {products.map((product, idx) => {
+    {businessData.products.map((product, idx) => {
       const isReversed = idx % 2 === 1; // odd = reversed on desktop
       return (
         <motion.div
