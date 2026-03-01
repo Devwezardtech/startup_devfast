@@ -466,7 +466,7 @@ shw form if lick edit
       </h2>
 
       <p className="text-gray-600 mb-4 text-sm">
-        Enter your preferred domain name.
+        Enter your preferred domain name. free 100%
       </p>
 
       <input
@@ -477,10 +477,10 @@ shw form if lick edit
         className="w-full border p-3 rounded-lg mb-6"
       />
 
-      <div className="flex justify-between items-center">
+      <div className="flex justify-center items-center gap-10">
         <button
           onClick={() => setIsPublishModalOpen(false)}
-          className="text-gray-500"
+          className="text-gray-600 px-12 py-3 rounded-full transition border border-gray-300 font-semibold hover:scale-105 transition"
         >
           Cancel
         </button>
@@ -497,9 +497,9 @@ shw form if lick edit
 
             window.location.href = "/project/urbanTee";
           }}
-          className="bg-yellow-400 text-black px-6 py-3 rounded-full font-semibold hover:scale-105 transition"
+          className="bg-yellow-400 text-gray-700 px-6 py-3 rounded-full font-semibold hover:scale-105 transition"
         >
-          Launch Now – ₱5,999
+          Launch Now
         </button>
       </div>
 
