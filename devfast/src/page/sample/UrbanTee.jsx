@@ -62,13 +62,37 @@ const [businessData, setBusinessData] = useState({
   
 
   products: [
-    { id: 1, name: "UA Premium Hoodie V3.0 - Midnight Black", front: "/urbantee/urban1.png", back: "/urbantee/urban2.png", desc: "Heavyweight Fleece, 500GSM, Double Layered Hood, Embroidered, Old English design, TopGrade Rubber Print, Luxurious Comfort, Front Pockets, Labelled Tags, Rubber Patching, New Cracked Back Print" },
-    { id: 2, name: "UA Premium Hoodie V3.0 - Moon Grey", front: "/urbantee/urban3.png", back: "/urbantee/urban4.png", desc: "Heavyweight Fleece, 500GSM, Double Layered Hood, Embroidered, Old English design, TopGrade Rubber Print, Luxurious Comfort, Front Pockets, Labelled Tags, Rubber Patching, New Cracked Back Print"},
-    { id: 3, name: "UA Prime F.C.O. Hoodies Black", front: "/urbantee/urban5.png", back: "/urbantee/urban6.png", desc: "Heavyweight Fleece, 500GSM, Double Layered Hood, Embroidered, Old English design, TopGrade Rubber Print, Luxurious Comfort, Front Pockets, Labelled Tags, Rubber Patching, New Cracked Back Print"},
-    { id: 4, name: "UA Prime F.C.O. Hoodies White", front: "/urbantee/urban8.png", back: "/urbantee/urban9.png", desc: "Deep white tone designed for elevated streetwear."},
-    { id: 5, name: "UA Plain Sweat Pants - Top Dye Grey", front: "/urbantee/urban10.png", back: "/urbantee/urban11.png", desc: "Elevate your casual wardrobe with the UA Plain Sweat Pants - Fleece Fabric | Top Dye Grey, designed for comfort and style." },
-    { id: 6, name: "UA Prime F.C.O. Sweat Pants Black", front: "/urbantee/urban12.png", back: "/urbantee/urban12.png", desc: "Structured cotton silhouette with a clean modern finish."},
-{ id: 7, name: "UA PRIME SHIRTS - F.C.O. White", front: "/urbantee/urban14.png", back: "/urbantee/urban15.png", desc: "Proudly crafted in Cebu City, Philippines. Available in 2 colorways. 310GSM pure cotton – substantial yet refined softness. Pre-shrunk, shrink-free construction for a consistent fit. Modern tailored cut with a sleek, versatile silhouette. Classic crew neck – timeless and resilient against wear. Front Premium rubber print – durable, crack- and peel-resistant finish. Engineered for breathability and all-day luxurious comfort. UA signature label – a mark of authenticity and Filipino pride. Part of the Back to Basic Collection – A limited release of essentials. Silkscreen back print - heat-cured for strong wash resistance, helping prevent premature fading and keeping the print looking premium over time." },
+    { id: 1, name: "UA Premium Hoodie V3.0 - Midnight Black", image: "/urbantee/urban1.png", back: "/urbantee/urban2.png", desc: "Heavyweight Fleece, 500GSM, Double Layered Hood, Embroidered, Old English design, TopGrade Rubber Print, Luxurious Comfort, Front Pockets, Labelled Tags, Rubber Patching, New Cracked Back Print" },
+    { id: 2, name: "UA Premium Hoodie V3.0 - Moon Grey", image: "/urbantee/urban3.png", back: "/urbantee/urban4.png", desc: "Heavyweight Fleece, 500GSM, Double Layered Hood, Embroidered, Old English design, TopGrade Rubber Print, Luxurious Comfort, Front Pockets, Labelled Tags, Rubber Patching, New Cracked Back Print"},
+    { id: 3, name: "UA Prime F.C.O. Hoodies Black", image: "/urbantee/urban5.png", back: "/urbantee/urban6.png", desc: "Heavyweight Fleece, 500GSM, Double Layered Hood, Embroidered, Old English design, TopGrade Rubber Print, Luxurious Comfort, Front Pockets, Labelled Tags, Rubber Patching, New Cracked Back Print"},
+    { id: 4, name: "UA Prime F.C.O. Hoodies White", image: "/urbantee/urban8.png", back: "/urbantee/urban9.png", desc: "Deep white tone designed for elevated streetwear."},
+    { id: 5, name: "UA Plain Sweat Pants - Top Dye Grey", image: "/urbantee/urban10.png", back: "/urbantee/urban11.png", desc: "Elevate your casual wardrobe with the UA Plain Sweat Pants - Fleece Fabric | Top Dye Grey, designed for comfort and style." },
+    { id: 6, name: "UA Prime F.C.O. Sweat Pants Black", image: "/urbantee/urban12.png", back: "/urbantee/urban13.png", desc: "Structured cotton silhouette with a clean modern finish."},
+{ id: 7, name: "UA PRIME SHIRTS - F.C.O. White", image: "/urbantee/urban14.png", back: "/urbantee/urban15.png", desc: "Proudly crafted in Cebu City, Philippines. Available in 2 colorways. 310GSM pure cotton – substantial yet refined softness. Pre-shrunk, shrink-free construction for a consistent fit. Modern tailored cut with a sleek, versatile silhouette. Classic crew neck – timeless and resilient against wear. Front Premium rubber print – durable, crack- and peel-resistant finish. Engineered for breathability and all-day luxurious comfort. UA signature label – a mark of authenticity and Filipino pride. Part of the Back to Basic Collection – A limited release of essentials. Silkscreen back print - heat-cured for strong wash resistance, helping prevent premature fading and keeping the print looking premium over time." },
+  ],
+
+  featureSections: [
+    {
+      id: 1,
+      title: "STREET ESSENCE",
+      desc: "Urban streetwear inspired by the essence of city life. Designed for comfort and elevated style.",
+      image: "/urbantee/urban16.png",
+      reverse: false,
+    },
+    {
+      id: 2,
+      title: "MODERN FORM",
+      desc: "Sleek silhouettes with modern tailoring that brings style and comfort together.",
+      image: "/urbantee/urban14.png",
+      reverse: true,
+    },
+    {
+      id: 3,
+      title: "ELEVATED STREET",
+      desc: "Elevate your streetwear style with versatile pieces designed for everyday wear and standout looks.",
+      image: "/urbantee/urban15.png",
+      reverse: false,
+    },
   ],
 
   });
@@ -94,7 +118,7 @@ const [businessData, setBusinessData] = useState({
 <section
   onClick={() => {
     if (!isEditingMode) return;
-    setEditingField("heroImage");
+    setEditingField("hero-image");
     setTempValue(businessData.heroImage);
   }}
   className={`relative min-h-screen flex flex-col md:flex-row items-center justify-center text-center px-6
@@ -194,37 +218,92 @@ shw form if lick edit
     <div className="bg-white text-black p-6 rounded-2xl w-full max-w-md">
       <h2 className="text-lg font-bold mb-4">Edit Content</h2>
 
-      <input
-        type="text"
-        value={tempValue}
-        onChange={(e) => setTempValue(e.target.value)}
-        className="w-full border p-2 mb-4"
-      />
+     {editingField?.includes("front") || editingField?.includes("back") ||
+ editingField?.includes("image") ? (
+  <input
+    type="file"
+    accept="image/*"
+    onChange={(e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const imageUrl = URL.createObjectURL(file);
+      setTempValue(imageUrl);
+    }}
+    className="w-full border p-2 mb-4"
+  />
+) : editingField?.includes("desc") ? (
+  <textarea
+    value={tempValue}
+    onChange={(e) => setTempValue(e.target.value)}
+    className="w-full border p-2 mb-4 h-32"
+  />
+) : (
+  <input
+    type="text"
+    value={tempValue}
+    onChange={(e) => setTempValue(e.target.value)}
+    className="w-full border p-2 mb-4"
+  />
+)}
 
       <button
         onClick={() => {
 
-  if (editingField?.startsWith("product-name-")) {
-    const id = parseInt(editingField.replace("product-name-", ""));
+  if (editingField?.startsWith("product-image-")) {
+  const id = parseInt(editingField.replace("product-image-", ""));
+
+  setBusinessData(prev => ({
+    ...prev,
+    products: prev.products.map(p =>
+      p.id === id ? { ...p, image: tempValue } : p
+    )
+  }));
+}
+
+else if (editingField === "hero-image") {
+  setBusinessData(prev => ({
+    ...prev,
+    heroImage: tempValue
+  }));
+}
+
+ else if (editingField?.startsWith("feature-image-")) {
+    const id = parseInt(editingField.replace("feature-image-", ""));
 
     setBusinessData(prev => ({
       ...prev,
-      products: prev.products.map(p =>
-        p.id === id ? { ...p, name: tempValue } : p
+      featureSections: prev.featureSections.map(s =>
+        s.id === id ? { ...s, image: tempValue } : s
       )
     }));
+  }
 
-  } else if (editingField?.startsWith("product-desc-")) {
-    const id = parseInt(editingField.replace("product-desc-", ""));
+  else if (editingField?.startsWith("feature-title-")) {
+    const id = parseInt(editingField.replace("feature-title-", ""));
 
     setBusinessData(prev => ({
       ...prev,
-      products: prev.products.map(p =>
-        p.id === id ? { ...p, desc: tempValue } : p
+      featureSections: prev.featureSections.map(s =>
+        s.id === id ? { ...s, title: tempValue } : s
       )
     }));
+  }
 
-  } else {
+
+  else if (editingField?.startsWith("feature-desc-")) {
+    const id = parseInt(editingField.replace("feature-desc-", ""));
+
+    setBusinessData(prev => ({
+      ...prev,
+      featureSections: prev.featureSections.map(s =>
+        s.id === id ? { ...s, desc: tempValue } : s
+      )
+    }));
+  }
+
+
+else {
     // normal fields like businessName, tagline, collection, heroImage
     setBusinessData(prev => ({
       ...prev,
@@ -302,25 +381,30 @@ shw form if lick edit
           className="grid md:grid-cols-2 gap-10 items-center"
         >
           {/* IMAGE */}
-          <div
-            className={`relative group
-              ${isReversed ? "md:order-2" : ""} 
-
-              order-1`} // on mobile, always first
-          >
-            <img
-              src={product.front}
-              alt={`${product.name} Front`}
-              className="rounded-3xl w-md object-cover transition duration-700 group-hover:opacity-0"
-            />
-            {product.back && (
-              <img
-                src={product.back}
-                alt={`${product.name} Back`}
-                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-700"
-              />
-            )}
-          </div>
+<div
+  className={`${
+    isReversed ? "md:order-2" : ""
+  } order-1 flex justify-center`}
+>
+  <div
+    className={`${
+      isEditingMode
+        ? "cursor-pointer border-2 border-yellow-400"
+        : ""
+    } rounded-3xl overflow-hidden`}
+    onClick={(e) => {
+      e.stopPropagation();
+      if (!isEditingMode) return;
+      setEditingField(`product-image-${product.id}`);
+    }}
+  >
+    <img
+      src={product.image}
+      alt={product.name}
+      className="w-[400px] h-[500px] object-cover rounded-3xl"
+    />
+  </div>
+</div>
 
           {/* TEXT */}
           <div
@@ -385,22 +469,13 @@ shw form if lick edit
 
             <div className="md:flex md:gap-8 p-6 md:p-10">
               {/* IMAGES */}
-              <div className="md:w-1/2 flex flex-col gap-4 mb-6 md:mb-0">
-                <div className="relative group">
-                  <img
-                    src={selectedProduct.front}
-                    alt={`${selectedProduct.name} Front`}
-                    className="rounded-2xl object-contain w-full h-64 md:h-[400px] transition duration-700 group-hover:opacity-0"
-                  />
-                  {selectedProduct.back && (
-                    <img
-                      src={selectedProduct.back}
-                      alt={`${selectedProduct.name} Back`}
-                      className="absolute inset-0 rounded-2xl object-contain opacity-0 group-hover:opacity-100 transition duration-700"
-                    />
-                  )}
-                </div>
-              </div>
+<div className="md:w-1/2 flex flex-col gap-4 mb-6 md:mb-0 items-center">
+  <img
+    src={selectedProduct.image}
+    alt={selectedProduct.name}
+    className="rounded-2xl object-contain w-full max-w-[450px] h-[350px] md:h-[450px]"
+  />
+</div>
 
               {/* TEXT */}
               <div className="md:w-1/2 flex flex-col justify-start">
@@ -431,71 +506,71 @@ shw form if lick edit
         </div>
       )}
 
-    <section
-  className="h-screen flex flex-col md:flex-row items-center justify-center text-center md:text-left"
+   {businessData.featureSections.map((section) => (
+ <section
+  key={section.id}
+  className={`h-screen flex flex-col ${
+    section.reverse ? "md:flex-row-reverse" : "md:flex-row"
+  } items-center justify-center text-center md:text-left
+  ${isEditingMode ? "outline outline-4 outline-yellow-400 cursor-pointer relative" : ""}`}
   style={{
-    backgroundImage: "url('/urbantee/urban16.png')",
+    backgroundImage: `url(${section.image})`,
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundAttachment: "fixed",
   }}
+  onClick={(e) => {
+    e.stopPropagation();
+    if (!isEditingMode) return;
+    setEditingField(`feature-image-${section.id}`);
+  }}
 >
-  <div className="bg-black/60 w-full h-full flex flex-col md:flex-row items-center justify-center p-6 md:p-12">
-   
-    <div className="md:w-1/2 md:pl-12 text-center md:text-left">
-      <h2 className="text-4xl md:text-6xl font-extrabold mb-4">
-        STREET ESSENCE
-      </h2>
-      <p className="text-gray-300 text-lg md:text-xl">
-        Urban streetwear inspired by the essence of city life. Designed for comfort and elevated style.
-      </p>
-    </div>
-  </div>
-</section>
+    <div className={`bg-black/60 w-full h-full flex flex-col ${
+      section.reverse ? "md:flex-row-reverse" : "md:flex-row"
+    } items-center justify-center p-6 md:p-12`}>
 
-      <section
-  className="h-screen flex flex-col md:flex-row-reverse items-center justify-center text-center md:text-left"
-  style={{
-    backgroundImage: "url('/urbantee/urban14.png')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundAttachment: "fixed",
-  }}
->
-  <div className="bg-black/60 w-full h-full flex flex-col md:flex-row-reverse items-center justify-center p-6 md:p-12">
-   
-    <div className="md:w-1/2 md:pr-12 text-center md:text-left">
-      <h2 className="text-4xl md:text-6xl font-extrabold mb-4">
-        MODERN FORM
-      </h2>
-      <p className="text-gray-300 text-lg md:text-xl">
-        Sleek silhouettes with modern tailoring that brings style and comfort together.
-      </p>
-    </div>
-  </div>
-</section>
+      <div className={`md:w-1/2 ${
+        section.reverse ? "md:pr-12" : "md:pl-12"
+      } text-center md:text-left`}>
 
-     <section
-  className="h-screen flex flex-col md:flex-row items-center justify-center text-center md:text-left"
-  style={{
-    backgroundImage: "url('/urbantee/urban15.png')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundAttachment: "fixed",
-  }}
->
-  <div className="bg-black/60 w-full h-full flex flex-col md:flex-row items-center justify-center p-6 md:p-12">
-   
-    <div className="md:w-1/2 md:pl-12 text-center md:text-left">
-      <h2 className="text-4xl md:text-6xl font-extrabold mb-4">
-        ELEVATED STREET
-      </h2>
-      <p className="text-gray-300 text-lg md:text-xl">
-        Elevate your streetwear style with versatile pieces designed for everyday wear and standout looks.
-      </p>
+        {/* TITLE */}
+        <h2
+          className={`text-4xl md:text-6xl font-extrabold mb-4 ${
+            isEditingMode
+              ? "border-2 border-yellow-400 cursor-pointer hover:bg-yellow-400/10"
+              : ""
+          }`}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (!isEditingMode) return;
+            setEditingField(`feature-title-${section.id}`);
+            setTempValue(section.title);
+          }}
+        >
+          {section.title}
+        </h2>
+
+        {/* DESCRIPTION */}
+        <p
+          className={`text-gray-300 text-lg md:text-xl ${
+            isEditingMode
+              ? "border-2 border-yellow-400 cursor-pointer hover:bg-yellow-400/10"
+              : ""
+          }`}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (!isEditingMode) return;
+            setEditingField(`feature-desc-${section.id}`);
+            setTempValue(section.desc);
+          }}
+        >
+          {section.desc}
+        </p>
+
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+))}
 
       <footer className="border-t border-white/10 py-4 text-center text-gray-500">
         © 2026 UrbanTee. All Rights Reserved.
