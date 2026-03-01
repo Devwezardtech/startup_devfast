@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef} from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import Checkout from "../Urbantee/Checkout";
 
 
 
@@ -42,6 +43,7 @@ const UrbanTeeLanding = () => {
    const [isEditingMode, setIsEditingMode] = useState(false);
 const [editingField, setEditingField] = useState(null);
 const [tempValue, setTempValue] = useState("");
+const [showCheckout, setShowCheckout] = useState(false);
 
 const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
 const [customDomain, setCustomDomain] = useState("");
@@ -467,14 +469,15 @@ shw form if lick edit
       </h2>
 
       <p className="text-gray-600 mb-4 text-sm">
-        Enter your preferred domain name. free 100%
+        Enter your preferred domain name. 100% free
       </p>
 
       <input
-        type="text"
+        type="Website"
         placeholder="https://yourbusiness.com"
         value={customDomain}
         onChange={(e) => setCustomDomain(e.target.value)}
+        required
         className="w-full border p-3 rounded-lg mb-6"
       />
 
@@ -488,20 +491,27 @@ shw form if lick edit
 
         <button
           onClick={() => {
+            
             if (!customDomain) {
-              alert("Please enter a domain name.");
               return;
+            }
+
+            else {
+              setShowCheckout(true);
             }
 
             // Optional: store domain before redirect
             localStorage.setItem("pendingDomain", customDomain);
 
-            navigate("/project/checkout");  
           }}
           className="bg-yellow-400 text-gray-700 px-6 py-3 rounded-full font-semibold hover:scale-105 transition"
         >
           Launch Now
         </button>
+        <Checkout
+        isOpen={showCheckout}
+        onClose={() => setShowCheckout(false)} 
+      />
       </div>
 
     </div>
