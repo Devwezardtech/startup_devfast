@@ -27,14 +27,22 @@ export default function DevfastLanding() {
     { label: "Projects", ref: projectsRef },
     { label: "Contact", ref: contactRef },
     { label: "Developer", ref: null }, 
+    { label: "Dashboard", ref: null }
   ];
+
+
 
   const handleScroll = (sec) => {
     if (sec.label === "Developer") {
       setShowDeveloperModal(true);
       setMenuOpen(false);
       window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-    } else if (sec.ref) {
+    }  else if (sec.label === "Dashboard") {
+    // Navigate to the dashboard route
+    go("/project/dashboard"); // make sure this path matches your route
+    setMenuOpen(false);
+    setShowDeveloperModal(false);
+    }else if (sec.ref) {
       sec.ref.current.scrollIntoView({ behavior: "smooth" });
       setMenuOpen(false);
       setShowDeveloperModal(false); // hide developer when scrolling to other sections

@@ -69,7 +69,7 @@ export default function ClientDashboard() {
     setMessages((prev) => [...prev, { type: "user", text }]);
     setTyping(true);
 
-    const delay = Math.random() * (35000 - 10000) + 10000; // 10-35s delay
+    const delay = Math.random() * (15000 - 5000) + 5000; // 10-35s delay
     setTimeout(() => {
       setMessages((prev) => [...prev, { type: "ai", text: generateAIReply(text) }]);
       setTyping(false);
