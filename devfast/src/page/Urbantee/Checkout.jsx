@@ -42,9 +42,13 @@ export default function Checkout({ isOpen, onClose }) {
 
   if (!isOpen) return null;
 
+  const isOfferActive = timeLeft > 0;
+
   const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
   const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
   const seconds = Math.floor((timeLeft / 1000) % 60);
+
+  const finalPrice = isOfferActive ? salePrice : originalPrice;
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 mx-8 md:mx-0">
@@ -64,7 +68,7 @@ export default function Checkout({ isOpen, onClose }) {
         </h1>
 
         {/* COUNTDOWN */}
-        {timeLeft > 0 ? (
+        {isOfferActive ? (
           <div className="text-center mb-6">
             <p className="text-blue-400 font-semibold mb-2">
               Limited Time Launch Offer
@@ -76,8 +80,8 @@ export default function Checkout({ isOpen, onClose }) {
             </div>
           </div>
         ) : (
-          <div className="text-center mb-6 text-red-600 font-bold">
-            Offer Expired
+          <div className="text-center mb-6 text-gray-700 font-semibold">
+            Launch offer ended. Regular price applies.
           </div>
         )}
 
@@ -94,36 +98,39 @@ export default function Checkout({ isOpen, onClose }) {
             <span className="font-semibold">Website Publishing</span>
           </div>
 
-          <div className="flex justify-between text-gray-500 line-through">
-            <span>Original Price:</span>
-            <span>₱{originalPrice.toLocaleString()}</span>
-          </div>
+          {/* If offer active show original price strike */}
+          {isOfferActive && (
+            <div className="flex justify-between text-gray-500 line-through">
+              <span>Original Price:</span>
+              <span>₱{originalPrice.toLocaleString()}</span>
+            </div>
+          )}
 
           <div className="flex justify-between text-2xl font-bold text-black">
-            <span>Today’s Price:</span>
-            <span>₱{salePrice.toLocaleString()}</span>
+            <span>Price:</span>
+            <span>₱{finalPrice.toLocaleString()}</span>
           </div>
 
-          <div className="bg-green-100 text-green-700 text-center py-2 rounded-lg font-semibold">
-            You Save ₱{savings.toLocaleString()} 🎉
-          </div>
+          {isOfferActive && (
+            <div className="bg-green-100 text-green-700 text-center py-2 rounded-lg font-semibold">
+              You Save ₱{savings.toLocaleString()} 🎉
+            </div>
+          )}
 
         </div>
-
-        <button
-          disabled={timeLeft <= 0}
+<div className="w-full items-center justify-center flex">
+  <button
           onClick={() => {
             window.location.href =
               "https://paymongo.link/l/YOUR_LINK_ID";
           }}
-          className={`w-full py-4 rounded-full font-bold transition ${
-            timeLeft > 0
-              ? "bg-yellow-400 text-black hover:scale-105"
-              : "bg-gray-300 text-gray-600 cursor-not-allowed"
-          }`}
+          className="w-lg py-4 px-4 rounded-full font-bold transition bg-yellow-400 text-black hover:scale-105"
         >
-          {timeLeft > 0 ? "Pay ₱5,999 Securely" : "Offer Expired"}
+          Pay ₱{finalPrice.toLocaleString()} Securely
         </button>
+
+</div>
+        
 
         <p className="text-xs text-gray-500 mt-4 text-center">
           Payments are processed securely via PayMongo.
