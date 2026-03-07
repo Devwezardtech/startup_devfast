@@ -15,7 +15,7 @@ import DonLeoFitnessLanding from "./page/sample/DonLeoFitness";
 import PrimeNestRealtyLanding from "./page/sample/PrimeNestRealty";
 import Checkout from "./page/Urbantee/Checkout";
 import OrderSuccess from "./page/Urbantee/Ordersuccess";
-
+import Dashboard from "./page/Dashboard/dashboard";
 
 export default function App() {
   return (
@@ -38,6 +38,8 @@ export default function App() {
       <Route path="/project/primeNestRealty" element={<PrimeNestRealtyLanding />} />
       <Route path="/project/checkout" element={<Checkout />} />
       <Route path="/project/order-success" element={<OrderSuccess />} />
+      <Route path="/project/dashboard" element={<Dashboard />} />
+      
       
     
 

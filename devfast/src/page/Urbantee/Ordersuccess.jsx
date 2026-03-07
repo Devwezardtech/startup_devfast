@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { CheckCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function OrderSuccess() {
   const [domain, setDomain] = useState("");
   const [progress, setProgress] = useState(1);
+   const navigate = useNavigate();
 
   useEffect(() => {
   const savedDomain = localStorage.getItem("pendingDomain");
@@ -86,7 +88,7 @@ export default function OrderSuccess() {
           Your website will be live within <strong>24 hours</strong>.
         </div>
 
-        <button className="bg-black text-white px-6 py-3 rounded-full hover:scale-105 transition">
+        <button className="bg-black text-white px-6 py-3 rounded-full hover:scale-105 transition" onClick={() => navigate("/project/dashboard")}>
           View Order Status
         </button>
 
