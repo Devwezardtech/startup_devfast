@@ -500,12 +500,20 @@ shw form if lick edit
               return;
             }
 
+            else if (customDomain === "urbantee.com") {
+              setIsPublishModalOpen(false);
+            }
+
             else {
+              
               setShowCheckout(true);
             }
+            
 
             // Optional: store domain before redirect
             localStorage.setItem("pendingDomain", customDomain);
+            
+            
 
           }}
           className="bg-yellow-400 text-gray-700 px-6 py-3 rounded-full font-semibold hover:scale-105 transition"
@@ -514,6 +522,7 @@ shw form if lick edit
         </button>
         <Checkout
         isOpen={showCheckout}
+        
         onClose={() => setShowCheckout(false)} 
       />
       </div>

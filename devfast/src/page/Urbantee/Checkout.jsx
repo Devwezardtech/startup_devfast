@@ -9,36 +9,33 @@ export default function Checkout({ isOpen, onClose }) {
   const savings = originalPrice - salePrice;
 
   useEffect(() => {
-    if (!isOpen) return;
+  if (!isOpen) return;
 
-    const savedDomain = localStorage.getItem("pendingDomain");
-    if (savedDomain) {
-      setDomain(savedDomain);
-    }
+  const savedDomain = localStorage.getItem("pendingDomain");
+  if (savedDomain) {
+    setDomain(savedDomain);
+  }
 
-    let deadline = localStorage.getItem("offerDeadline");
+  const SALE_DURATION = 24 * 60 * 60 * 1000; // 24h
+  const CYCLE_DURATION = 48 * 60 * 60 * 1000; // 48h total
 
-    if (!deadline) {
-      deadline = new Date().getTime() + 24 * 60 * 60 * 1000;
-      localStorage.setItem("offerDeadline", deadline);
+  const timer = setInterval(() => {
+    const now = Date.now();
+
+    const cyclePosition = now % CYCLE_DURATION;
+
+    if (cyclePosition < SALE_DURATION) {
+      const remaining = SALE_DURATION - cyclePosition;
+      setTimeLeft(remaining);
     } else {
-      deadline = parseInt(deadline);
+      setTimeLeft(0);
     }
 
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = deadline - now;
+  }, 1000);
 
-      if (distance <= 0) {
-        setTimeLeft(0);
-        clearInterval(timer);
-      } else {
-        setTimeLeft(distance);
-      }
-    }, 1000);
+  return () => clearInterval(timer);
 
-    return () => clearInterval(timer);
-  }, [isOpen]);
+}, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -119,15 +116,36 @@ export default function Checkout({ isOpen, onClose }) {
 
         </div>
 <div className="w-full items-center justify-center flex">
-  <button
+ { /** this is for real payment integration, currently it just redirects to a placeholder link *
+  * 
+  *  <button
           onClick={() => {
             window.location.href =
               "https://paymongo.link/l/YOUR_LINK_ID";
           }}
           className="w-lg py-4 px-4 rounded-full font-bold transition bg-yellow-400 text-black hover:scale-105"
         >
-          Pay ₱{finalPrice.toLocaleString()} Securely
+          
         </button>
+  * 
+  */}
+
+  <button className="w-lg py-4 px-4 rounded-full font-bold transition bg-yellow-400 text-black hover:scale-105" onClick={
+    () => {
+      // Simulate payment processing delay
+      setTimeout(() => {
+        // Clear pending domain from localStorage
+
+        //localStorage.removeItem("pendingDomain");
+        
+        // Redirect to order success page
+        window.location.href = "/project/order-success";
+      }, 1500);
+    }
+  }>
+    Pay ₱{finalPrice.toLocaleString()} Securely
+
+  </button>
 
 </div>
         
