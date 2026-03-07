@@ -214,7 +214,21 @@ export default function ClientDashboard() {
   }
 
   // ===== Fallback =====
-  return "Thanks for your message! Could you tell me more so I can assist you better?";
+const fallbackReplies = [
+  "Thanks for your message! Could you tell me more so I can assist you better?",
+  "I’m here to help! Can you give me more details about what you need?",
+  "Could you clarify your question a bit so I can provide the best answer?",
+  "I want to make sure I understand. Can you explain a little more?",
+  "Thanks for reaching out! Could you provide some more information?",
+  "I’m happy to assist! Can you tell me exactly what you’re looking for?",
+  "Let’s make sure I get it right. Can you elaborate a bit more?",
+  "I’d love to help! Can you give me some more details?",
+  "Can you explain a little more so I can give the best guidance?",
+  "I’m here to support you! Could you share more about your question?"
+];
+
+// Use a random fallback reply
+return fallbackReplies[Math.floor(Math.random() * fallbackReplies.length)];
 };
 
   const sendMessageHandler = () => {
@@ -335,25 +349,25 @@ export default function ClientDashboard() {
       </div>
 
       {/* Input */}
-      <div className="p-4 border-t flex gap-2">
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder="Type your message..."
-          className="flex-1 border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && e.target.value.trim() !== "") {
-              sendMessageHandler();
-            }
-          }}
-        />
-        <button
-          className="bg-blue-500 text-white px-4 py-2 rounded-full"
-          onClick={sendMessageHandler}
-        >
-          Send
-        </button>
-      </div>
+<div className="p-4 border-t flex gap-2">
+  <input
+    ref={inputRef}
+    type="text"
+    placeholder="Type your message..."
+    className="flex-grow min-w-0 border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+    onKeyDown={(e) => {
+      if (e.key === "Enter" && e.target.value.trim() !== "") {
+        sendMessageHandler();
+      }
+    }}
+  />
+  <button
+    className="bg-blue-500 text-white px-5 py-2 rounded-full flex-shrink-0"
+    onClick={sendMessageHandler}
+  >
+    Send
+  </button>
+</div>
     </div>
   </div>
 )}
