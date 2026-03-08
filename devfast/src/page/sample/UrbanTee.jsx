@@ -3,32 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Checkout from "../Urbantee/Checkout";
-
-
-
-const DescriptionWithToggle = ({ text, limit = 180 }) => {
-  const [showFull, setShowFull] = useState(false);
-  const isLong = text.length > limit;
- 
-
- 
-
-  return (
-    <div className="text-gray-400 mb-4">
-      <p>
-        {showFull || !isLong ? text : text.slice(0, limit) + "..."}
-      </p>
-      {isLong && (
-        <button
-          onClick={() => setShowFull(!showFull)}
-          className="text-yellow-400 font-semibold mt-1 hover:underline"
-        >
-          {showFull ? "See Less" : "See More"}
-        </button>
-      )}
-    </div>
-  );
-};
+import DescriptionWithToggle from "../../components/ui/DescriptionWithToggle";
 
  const delays = [5000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];
 
@@ -50,8 +25,7 @@ const [showCheckout, setShowCheckout] = useState(false);
 const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
 const [customDomain, setCustomDomain] = useState("");
 
-// for publish data
-const [publishedData, setPublishedData] = useState(null);
+
 
 
   const timerRef = useRef(null);
@@ -489,49 +463,36 @@ shw form if lick edit
       />
 
       <div className="flex justify-center items-center gap-10">
-        <button
-          onClick={() => setIsPublishModalOpen(false)}
-          className="text-gray-600 px-12 py-3 rounded-full transition border border-gray-300 font-semibold hover:scale-105 transition"
-        >
-          Cancel
-        </button>
+  <button
+    onClick={() => setIsPublishModalOpen(false)}
+    className="text-gray-600 px-12 py-3 rounded-full transition border border-gray-300 font-semibold hover:scale-105 transition"
+  >
+    Cancel
+  </button>
 
-        <button
-          onClick={() => {
-            
-            if (!customDomain) {
-              return;
-            }
+  <button
+    onClick={() => {
+      if (!customDomain) return;
 
-            else if (customDomain === "urbantee.com") {
-              setIsPublishModalOpen(false);
-            }
+      else if (customDomain === "urbantee.com") {
+        setIsPublishModalOpen(false);
+      } else {
+        setShowCheckout(true);
+      }
 
-            else {
-              
-              setShowCheckout(true);
-            }
-            
-            //  Save current preview data as final client website data
-    setPublishedData({ ...businessData, domain: customDomain });
+      localStorage.setItem("pendingDomain", customDomain);
+    }}
+    className="bg-yellow-400 text-gray-700 px-6 py-3 rounded-full font-semibold hover:scale-105 transition"
+  >
+    Launch Now
+  </button>
 
-            // Optional: store domain before redirect
-            localStorage.setItem("pendingDomain", customDomain);
-            
-            
-
-          }}
-          className="bg-yellow-400 text-gray-700 px-6 py-3 rounded-full font-semibold hover:scale-105 transition"
-        >
-          Launch Now
-        </button>
-        
-        <Checkout
-        isOpen={showCheckout}
-        
-        onClose={() => setShowCheckout(false)} 
-      />
-      </div>
+  <Checkout
+    isOpen={showCheckout}
+    onClose={() => setShowCheckout(false)}
+    publishedData={{ ...businessData, domain: customDomain }}
+  />
+</div>
 
     </div>
   </div>
