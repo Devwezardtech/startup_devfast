@@ -51,7 +51,7 @@ const [isPublishModalOpen, setIsPublishModalOpen] = useState(false);
 const [customDomain, setCustomDomain] = useState("");
 
 // for publish data
-
+const [publishedData, setPublishedData] = useState(null);
 
 
   const timerRef = useRef(null);
@@ -512,6 +512,8 @@ shw form if lick edit
               setShowCheckout(true);
             }
             
+            //  Save current preview data as final client website data
+    setPublishedData({ ...businessData, domain: customDomain });
 
             // Optional: store domain before redirect
             localStorage.setItem("pendingDomain", customDomain);
@@ -523,6 +525,7 @@ shw form if lick edit
         >
           Launch Now
         </button>
+        
         <Checkout
         isOpen={showCheckout}
         

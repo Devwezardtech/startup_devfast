@@ -548,7 +548,7 @@ const [openPreviewModal, setOpenPreviewModal] = useState(false);
         </button>
       </div>
       <iframe
-        src="/project/urbanTee"
+        src="/project/urbanTeePreview"
         title="Website Preview"
         className="flex-1 w-full border-none"
       />

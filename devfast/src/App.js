@@ -16,6 +16,7 @@ import PrimeNestRealtyLanding from "./page/sample/PrimeNestRealty";
 import Checkout from "./page/Urbantee/Checkout";
 import OrderSuccess from "./page/Urbantee/Ordersuccess";
 import Dashboard from "./page/Dashboard/dashboard";
+import UrbanTeeLandingPreview from "./page/Urbantee/UrbanTeeLandingPreview";
 
 export default function App() {
   return (
@@ -39,6 +40,8 @@ export default function App() {
       <Route path="/project/checkout" element={<Checkout />} />
       <Route path="/project/order-success" element={<OrderSuccess />} />
       <Route path="/project/dashboard" element={<Dashboard />} />
+      <Route path="/project/urbanTeePreview" element={<UrbanTeeLandingPreview />} />
+
       
       
     
