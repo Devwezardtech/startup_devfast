@@ -463,35 +463,40 @@ shw form if lick edit
       />
 
       <div className="flex justify-center items-center gap-10">
-  <button
-    onClick={() => setIsPublishModalOpen(false)}
-    className="text-gray-600 px-12 py-3 rounded-full transition border border-gray-300 font-semibold hover:scale-105 transition"
-  >
-    Cancel
-  </button>
+   <button
+          onClick={() => setIsPublishModalOpen(false)}
+          className="text-gray-600 px-12 py-3 rounded-full border border-gray-300 font-semibold hover:scale-105 transition"
+        >
+          Cancel
+        </button>
 
-  <button
-    onClick={() => {
-      if (!customDomain) return;
+        <button
+          onClick={() => {
+            if (!customDomain) return;
 
-      else if (customDomain === "urbantee.com") {
-        setIsPublishModalOpen(false);
-      } else {
-        setShowCheckout(true);
-      }
+            if (customDomain === "urbantee.com") {
+              setIsPublishModalOpen(false);
+            } else {
+              setShowCheckout(true);
+            }
 
-      localStorage.setItem("pendingDomain", customDomain);
-    }}
-    className="bg-yellow-400 text-gray-700 px-6 py-3 rounded-full font-semibold hover:scale-105 transition"
-  >
-    Launch Now
-  </button>
+            // Save full business data + custom domain to localStorage
+            localStorage.setItem(
+              "pendingBusinessData",
+              JSON.stringify({ ...businessData, domain: customDomain })
+            );
+          }}
+          className="bg-yellow-400 text-gray-700 px-6 py-3 rounded-full font-semibold hover:scale-105 transition"
+        >
+          Launch Now
+        </button>
 
-  <Checkout
-    isOpen={showCheckout}
-    onClose={() => setShowCheckout(false)}
-    publishedData={{ ...businessData, domain: customDomain }}
-  />
+        {/* Checkout Modal */}
+        <Checkout
+          isOpen={showCheckout}
+          onClose={() => setShowCheckout(false)}
+          publishedData={JSON.parse(localStorage.getItem("pendingBusinessData"))}
+        />
 </div>
 
     </div>
