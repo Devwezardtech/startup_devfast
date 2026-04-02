@@ -27,7 +27,7 @@ export default function DevfastLanding() {
     { label: "Projects", ref: projectsRef },
     { label: "Contact", ref: contactRef },
     { label: "Developer", ref: null }, 
-    { label: "Dashboard", ref: null }
+   // { label: "Dashboard", ref: null }
   ];
 
 
