@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
-import { Mail, CheckCircle, Menu, X, MessageCircle } from "lucide-react";
+import { Mail, CheckCircle, Menu, X, MessageCircle, Instagram } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import DeveloperCard from "./developercard";
 
@@ -204,7 +204,7 @@ export default function DevfastLanding() {
             { title: "LoreCafe", img: "/lorecafe_image/acafe3.png", action: () => go("/project/lorecafe") },
             { title: "Engineer / Contractor", img: "https://images.unsplash.com/photo-1503387762-592deb58ef4e", action: () => go("/project/engineer") },
             { title: "AutoGalaxy", img: "/image/car3.png", action: () => go("/project/autogalaxy") },
-            { title: "UrbanTee", img: "/urbantee/urbantee1.png", action: () => go("/project/urbanTee") },
+            { title: "UrbanTee", img: "/urbantee/urbantee1.png", action: () => go("/project/urbantee") },
             { title: "DonLeo Fitness", img: "/fitness/gym3.png", action: () => go("/project/donLeoFitness") },
             { title: "PrimeNest Realty", img: "/primenestrealty/house8.png", action: () => go("/project/primeNestRealty") },
           ].map((project) => (
@@ -237,38 +237,63 @@ export default function DevfastLanding() {
 </p>
 
     {/* Contact Card */}
-    <div className="relative z-10 w-full max-w-md mx-auto bg-white rounded-3xl p-8 sm:p-10 shadow-xl flex flex-col items-center gap-6">
-      <p className="text-slate-700 text-center font-medium">
-        Choose your preferred way to contact:
-      </p>
+    <div className="relative z-10 w-full max-w-md mx-auto bg-white/90 backdrop-blur-xl border border-white/20 rounded-3xl p-8 sm:p-10 shadow-2xl flex flex-col items-center gap-6">
 
-      {/* Buttons */}
-      <div className="flex flex-col sm:flex-row gap-4 w-full">
-        <div
-          onClick={() =>
-              window.location.assign(
-  "mailto:devfastt@gmail.com?subject=Project Consultation Request&body=Dear Devfast Team,%0D%0A%0D%0AI would like to request a consultation regarding a new development project.%0D%0A%0D%0APlease review the project details below:%0D%0A%0D%0A Full Name:%0D%0A Company / Business Name:%0D%0A Contact Email and Phone Number:%0D%0A Project Type (Business Website, E-commerce, Web Application, etc.):%0D%0A Project Overview:%0D%0A Primary Business Goals:%0D%0A Target Launch Timeline:%0D%0A Estimated Budget Range:%0D%0A%0D%0AWe look forward to reviewing your requirements and providing a tailored proposal.%0D%0A%0D%0AKind regards,"
-)
-            }
-          className="flex-1 inline-flex items-center justify-center gap-2 px-6 mx-8 md:mx-0 py-4 bg-blue-500 text-white rounded-2xl font-semibold hover:bg-blue-600 transition transform hover:-translate-y-1 shadow-md"
-        >
-          <Mail className="w-5 h-5" /> Email
-        </div>
-        <a
-  href="https://m.me/801311679735475?text=Dear%20Devfast%20Team,%0A%0AI%20would%20like%20to%20request%20a%20consultation%20regarding%20a%20new%20development%20project.%0A%0APlease%20find%20the%20project%20details%20below:%0A%0A1.%20Full%20Name:%0A2.%20Company%20/%20Business%20Name:%0A3.%20Contact%20Email%20and%20Phone%20Number:%0A4.%20Project%20Type%20(Business%20Website,%20E-commerce,%20Web%20Application,%20etc.):%0A5.%20Project%20Overview:%0A6.%20Primary%20Business%20Goals:%0A7.%20Target%20Launch%20Timeline:%0A8.%20Estimated%20Budget%20Range:%0A%0AI%20look%20forward%20to%20your%20response."
-  target="_blank"
-  rel="noopener noreferrer"
-  className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 mx-8 md:mx-0 bg-green-500 text-white rounded-2xl font-semibold hover:bg-green-600 transition transform hover:-translate-y-1 shadow-md"
->
-  <MessageCircle className="w-5 h-5" /> Messenger
-</a>
-      </div>
+  {/* TITLE */}
+  <div className="text-center space-y-2">
+    <p className="text-slate-800 font-semibold text-lg">
+      Contact Devfast
+    </p>
+    <p className="text-slate-500 text-sm">
+      Choose your preferred way to reach us
+    </p>
+  </div>
 
-      {/* Optional small note */}
-      <p className="text-slate-400 text-sm mt-4">
-        We'll respond within 59 minutes to 24 hours.
-      </p>
+  {/* BUTTONS */}
+  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
+
+    {/* EMAIL */}
+    <div
+      onClick={() =>
+        window.location.assign(
+          "mailto:devfastt@gmail.com?subject=Project Consultation Request&body=Dear Devfast Team,%0D%0A%0D%0AI would like to request a consultation regarding a new development project..."
+        )
+      }
+      className="group flex flex-col items-center justify-center gap-2 px-3 py-2 bg-blue-500/90 text-white rounded-2xl font-semibold transition-all duration-300 hover:bg-blue-600 hover:-translate-y-1 hover:shadow-lg cursor-pointer"
+    >
+      <Mail className="w-6 h-6 group-hover:scale-110 transition" />
+      <span className="text-sm">Email</span>
     </div>
+
+    {/* MESSENGER */}
+    <a
+      href="https://m.me/801311679735475"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex flex-col items-center justify-center gap-2 px-3 py-2 bg-green-500/90 text-white rounded-2xl font-semibold transition-all duration-300 hover:bg-green-600 hover:-translate-y-1 hover:shadow-lg"
+    >
+      <MessageCircle className="w-6 h-6 group-hover:scale-110 transition" />
+      <span className="text-sm">Messenger</span>
+    </a>
+
+    {/* INSTAGRAM */}
+    <a
+      href="https://instagram.com/devfast_"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group flex flex-col items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white rounded-2xl font-semibold transition-all duration-300 hover:opacity-90 hover:-translate-y-1 hover:shadow-lg"
+    >
+      <Instagram className="w-6 h-6 group-hover:scale-110 transition" />
+      <span className="text-sm">Instagram</span>
+    </a>
+
+  </div>
+
+  {/* FOOT NOTE */}
+  <p className="text-slate-400 text-xs text-center mt-2">
+    ⚡ We usually respond within <span className="font-medium text-slate-600">1 hour – 24 hours</span>
+  </p>
+</div>
   </div>
 </section>
 
