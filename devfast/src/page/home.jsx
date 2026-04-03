@@ -6,6 +6,7 @@ import { Mail, CheckCircle, Menu, X, MessageCircle, Instagram } from "lucide-rea
 import { useNavigate } from "react-router-dom";
 import DeveloperCard from "./developercard";
 
+
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0 },
