@@ -228,24 +228,24 @@ export default function DevfastLanding() {
       target="_blank"
       rel="noopener noreferrer"
       className="flex items-center justify-center gap-2 px-4 py-3 
-      bg-green-500 text-white rounded-xl font-semibold 
+      bg-green-800 hover:bg-green-600 text-white rounded-xl font-semibold 
       hover:bg-green-600 transition-all duration-300 
       shadow-md hover:shadow-lg hover:-translate-y-1"
     >
-      💬 Inquire
+      I want this
     </a>
 
     {/* VIEW SAMPLE BUTTON */}
     <button
       onClick={project.action}
       className="flex items-center justify-center gap-2 px-4 py-3 
-      bg-gradient-to-r from-blue-500 to-cyan-400 
-      hover:from-blue-600 hover:to-cyan-500 
+      bg-gradient-to-r from-blue-800 to-cyan-700 
+      hover:from-blue-700 hover:to-cyan-600 
       text-white rounded-xl font-semibold 
       shadow-md hover:shadow-lg 
       transition-all duration-300 hover:-translate-y-1"
     >
-      🚀 View
+      View
     </button>
 
   </div>
