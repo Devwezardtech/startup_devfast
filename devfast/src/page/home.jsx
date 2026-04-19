@@ -289,7 +289,7 @@ export default function DevfastLanding() {
           "mailto:devfastt@gmail.com?subject=Project Consultation Request&body=Dear Devfast Team,%0D%0A%0D%0AI would like to request a consultation regarding a new development project..."
         )
       }
-      className="group flex flex-col items-center justify-center gap-2 px-3 py-2 bg-blue-500/90 text-white rounded-2xl font-semibold transition-all duration-300 hover:bg-blue-600 hover:-translate-y-1 hover:shadow-lg cursor-pointer"
+      className="group flex flex-col items-center justify-center gap-2 px-3 py-2 rounded-2xl font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-sm cursor-pointer"
     >
       <Mail className="w-6 h-6 group-hover:scale-110 transition" />
       <span className="text-sm">Email</span>
@@ -300,7 +300,7 @@ export default function DevfastLanding() {
       href="https://m.me/801311679735475"
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col items-center justify-center gap-2 px-3 py-2 bg-green-500/90 text-white rounded-2xl font-semibold transition-all duration-300 hover:bg-green-600 hover:-translate-y-1 hover:shadow-lg"
+      className="group flex flex-col items-center justify-center gap-2 px-3 py-2 rounded-2xl font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-sm"
     >
       <MessageCircle className="w-6 h-6 group-hover:scale-110 transition" />
       <span className="text-sm">Messenger</span>
@@ -311,7 +311,7 @@ export default function DevfastLanding() {
       href="https://instagram.com/devfast_"
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col items-center justify-center gap-2 px-3 py-2 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white rounded-2xl font-semibold transition-all duration-300 hover:opacity-90 hover:-translate-y-1 hover:shadow-lg"
+      className="group flex flex-col items-center justify-center gap-2 px-3 py-2 rounded-2xl font-semibold transition-all duration-300 hover:opacity-90 hover:-translate-y-1 hover:shadow-sm"
     >
       <Instagram className="w-6 h-6 group-hover:scale-110 transition" />
       <span className="text-sm">Instagram</span>
