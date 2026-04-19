@@ -212,15 +212,44 @@ export default function DevfastLanding() {
             <motion.div key={project.title} whileHover={{ scale: 1.05, y: -5 }} transition={{ duration: 0.4 }}>
               <Card className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500">
                 <img src={project.img} alt={project.title} className="h-52 w-full object-cover hover:scale-105 transition-transform duration-500" />
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold text-slate-900">{project.title}</h3>
-                  <div className="mx-6 md:mx-8">
-                    <Button onClick={project.action} className="mt-4 w-full bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-blue-600 hover:to-cyan-500 text-white font-semibold shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-1">
-                    View This Sample
-                  </Button>
-                  </div>
-                  
-                </CardContent>
+                <CardContent className="p-6 flex flex-col gap-4">
+  <h3 className="text-xl font-semibold text-slate-900">
+    {project.title}
+  </h3>
+
+  {/* BUTTON GROUP */}
+  <div className="grid grid-cols-2 gap-3 mt-2">
+
+    {/* INQUIRE BUTTON (Messenger) */}
+    <a
+      href={`https://m.me/801311679735475?text=${encodeURIComponent(
+        `Hi Devfast! I'm interested in this project: ${project.title}`
+      )}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center justify-center gap-2 px-4 py-3 
+      bg-green-500 text-white rounded-xl font-semibold 
+      hover:bg-green-600 transition-all duration-300 
+      shadow-md hover:shadow-lg hover:-translate-y-1"
+    >
+      💬 Inquire
+    </a>
+
+    {/* VIEW SAMPLE BUTTON */}
+    <button
+      onClick={project.action}
+      className="flex items-center justify-center gap-2 px-4 py-3 
+      bg-gradient-to-r from-blue-500 to-cyan-400 
+      hover:from-blue-600 hover:to-cyan-500 
+      text-white rounded-xl font-semibold 
+      shadow-md hover:shadow-lg 
+      transition-all duration-300 hover:-translate-y-1"
+    >
+      🚀 View
+    </button>
+
+  </div>
+</CardContent>
               </Card>
             </motion.div>
           ))}
