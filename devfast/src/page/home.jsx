@@ -210,7 +210,7 @@ export default function DevfastLanding() {
             { title: "PrimeNest Realty", img: "/primenestrealty/house8.png", action: () => go("/project/primeNestRealty") },
           ].map((project) => (
             <motion.div key={project.title} whileHover={{ scale: 1.05, y: -5 }} transition={{ duration: 0.4 }}>
-              <Card className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-lg hover:shadow-2xl transition-all duration-500">
+              <Card className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm transition-all duration-500">
                 <img src={project.img} alt={project.title} className="h-52 w-full object-cover hover:scale-105 transition-transform duration-500" />
                 <CardContent className="p-6 flex flex-col gap-4">
   <h3 className="text-xl font-semibold text-slate-900">
@@ -267,7 +267,7 @@ export default function DevfastLanding() {
 </p>
 
     {/* Contact Card */}
-    <div className="relative z-10 w-full max-w-md mx-auto bg-white/90 backdrop-blur-xl border border-white/20 rounded-3xl p-8 sm:p-10 shadow-2xl flex flex-col items-center gap-6">
+    <div className="relative z-10 w-full max-w-md mx-auto bg-white/90 backdrop-blur-sm border border-white/20 rounded-3xl p-8 sm:p-10 shadow-sm flex flex-col items-center gap-6">
 
   {/* TITLE */}
   <div className="text-center space-y-2">
