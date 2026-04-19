@@ -292,7 +292,7 @@ export default function DevfastLanding() {
 
   {/* FOOT NOTE */}
   <p className="text-slate-400 text-xs text-center mt-2">
-    ⚡ We usually respond within <span className="font-medium text-slate-600">1 hour – 24 hours</span>
+    ⚡ We usually respond within <span className="font-medium text-slate-600">hours</span>
   </p>
 </div>
   </div>
