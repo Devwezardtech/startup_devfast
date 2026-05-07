@@ -121,7 +121,7 @@ export default function DevfastLanding() {
           animate="visible"
           variants={fadeUp}
           transition={{ duration: 0.8 }}
-          className="relative text-4xl md:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 bg-clip-text text-transparent"
+          className="relative text-3xl md:text-3xl font-semibol tracking-tight bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 bg-clip-text text-transparent"
         >
           We Build Websites That Grow Businesses.
         </motion.h1>
@@ -175,7 +175,7 @@ export default function DevfastLanding() {
       </section>
 
       {/* ================= SERVICES ================= */}
-      <section ref={servicesRef} className="py-28 px-8 max-w-6xl mx-auto">
+      <section ref={servicesRef} className="py-4 px-8 max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-16">What We Deliver</h2>
 
         <div className="grid md:grid-cols-3 gap-10">
@@ -265,10 +265,10 @@ export default function DevfastLanding() {
 <section ref={contactRef} className="bg-gradient-to-r from-sky-50 to-white py-24 px-8">
   <div className="max-w-3xl mx-auto text-center">
     {/* Header */}
-   <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-4">
+   <h2 className="text-2xl md:text-3xl font-semibold text-slate-900 mb-4">
   Talk to Us
 </h2>
-<p className="text-slate-600 mb-12 text-lg md:text-xl">
+<p className="text-slate-600 mb-12 text-md md:text-md">
   Got an idea for a website or app? Send us a message and we'll start building it with you.
 </p>
 
