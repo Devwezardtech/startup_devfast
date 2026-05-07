@@ -159,7 +159,7 @@ export default function DevfastLanding() {
       </section>
 
       {/* ================= STATS ================= */}
-      <section className="py-24 px-8 bg-slate-50">
+      <section className="py-12 px-8 bg-slate-50">
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 text-center">
           {[
             { number: "100+", label: "Projects Delivered" },
@@ -175,7 +175,7 @@ export default function DevfastLanding() {
       </section>
 
       {/* ================= SERVICES ================= */}
-      <section ref={servicesRef} className="py-4 px-8 max-w-6xl mx-auto">
+      <section ref={servicesRef} className="py-28 px-8 max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-16">What We Deliver</h2>
 
         <div className="grid md:grid-cols-3 gap-10">
@@ -202,7 +202,7 @@ export default function DevfastLanding() {
       </section>
 
       {/* ================= PROJECTS ================= */}
-      <section ref={projectsRef} className="py-28 px-8 max-w-6xl mx-auto">
+      <section ref={projectsRef} className="py-12 px-8 max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12 tracking-tight">Sample Projects</h2>
 
         <div className="grid md:grid-cols-3 gap-10">
@@ -262,7 +262,7 @@ export default function DevfastLanding() {
         </div>
       </section>
 
-<section ref={contactRef} className="bg-gradient-to-r from-sky-50 to-white py-24 px-8">
+<section ref={contactRef} className="bg-gradient-to-r from-sky-50 to-white pt-12 px-8">
   <div className="max-w-3xl mx-auto text-center">
     {/* Header */}
    <h2 className="text-2xl md:text-3xl font-semibold text-slate-900 mb-4">
