@@ -27,7 +27,7 @@ export default function DevfastLanding() {
     { label: "Services", ref: servicesRef },
     { label: "Projects", ref: projectsRef },
     { label: "Contact", ref: contactRef },
-    { label: "Developer", ref: null }, 
+   // { label: "Developer", ref: null }, 
    // { label: "Dashboard", ref: null }
   ];
 
@@ -162,12 +162,12 @@ export default function DevfastLanding() {
       <section className="py-24 px-8 bg-slate-50">
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 text-center">
           {[
-            { number: "20+", label: "Projects Delivered" },
-            { number: "100%", label: "Client Satisfaction" },
+            { number: "100+", label: "Projects Delivered" },
+            { number: "98%", label: "Client Satisfaction" },
             { number: "Fast", label: "Performance Optimized" },
           ].map((stat) => (
             <div key={stat.label}>
-              <h3 className="text-5xl font-extrabold text-blue-600">{stat.number}</h3>
+              <h3 className="text-3xl font-simebold text-blue-700">{stat.number}</h3>
               <p className="mt-2 text-slate-600">{stat.label}</p>
             </div>
           ))}
