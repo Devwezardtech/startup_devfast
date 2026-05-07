@@ -130,12 +130,12 @@ export default function DevfastLanding() {
           Fast, professional, and easy-to-manage sites that grow your business and drive revenue.
         </motion.p>
 
-        <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+        <div className="mt-10 flex flex-col justify-center gap-4 md:gap-8 md:flex-row">
           <Button
             onClick={() =>
               contactRef.current?.scrollIntoView({ behavior: "smooth" })
             }
-            className="inline-flex items-center justify-center px-6 py-3 text-sm md:text-base font-semibold rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-lg hover:scale-105 hover:shadow-xl transition duration-300 mx-16 md:mx-0"
+            className="inline-flex items-center justify-center px-6 py-3 text-sm md:text-base font-semibold rounded-full bg-gradient-to-r from-blue-800 to-cyan-500 text-white shadow-lg hover:scale-105 hover:shadow-xl transition duration-300 mx-16 md:mx-0 sm:mx-40"
           >
             Start Your Project
           </Button>
@@ -145,7 +145,7 @@ export default function DevfastLanding() {
             onClick={() =>
               projectsRef.current?.scrollIntoView({ behavior: "smooth" })
             }
-            className="inline-flex items-center justify-center px-6 py-3 text-sm md:text-base font-semibold rounded-full border border-slate-300 text-slate-700 hover:bg-slate-100 transition duration-300 mx-16 md:mx-0"
+            className="inline-flex items-center justify-center px-6 py-3 text-sm md:text-base font-semibold rounded-full border border-slate-300 text-slate-700 hover:bg-slate-100 transition duration-300 mx-16 md:mx-0 sm:mx-40"
           >
             View Our Work
           </Button>
@@ -286,7 +286,7 @@ export default function DevfastLanding() {
     <div
       onClick={() =>
         window.location.assign(
-          "mailto:devfastt@gmail.com?subject=Project Consultation Request&body=Dear Devfast Team,%0D%0A%0D%0AI would like to request a consultation regarding a new development project..."
+          "mailto:devfastt@gmail.com?subect=Project Consultation Request&body=Dear Devfast Team,%0D%0A%0D%0AI would like to request a consultation regarding a new development project..."
         )
       }
       className="group flex flex-col items-center justify-center gap-2 px-3 py-2 rounded-2xl font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-sm cursor-pointer"
@@ -332,7 +332,7 @@ export default function DevfastLanding() {
     {/* Overlay */}
     
     <div
-      className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+      classe="absolute inset-0 bg-black/50 backdrop-blur-sm"
       onClick={() => setShowDeveloperModal(false)}
     ></div>
 
