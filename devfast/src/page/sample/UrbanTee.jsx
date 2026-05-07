@@ -5,8 +5,11 @@ import { ArrowLeft } from "lucide-react";
 import Checkout from "../Urbantee/Checkout";
 import DescriptionWithToggle from "../../components/ui/DescriptionWithToggle";
 
- const delays = [5000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000];
-
+ 
+ const delays = [
+  {/*const delays = [5000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000]; */}
+ ]; //this array is for the delay of the notification to user, temporary comment this for the no edit for now
+ 
 const UrbanTeeLanding = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -198,7 +201,7 @@ const [businessData, setBusinessData] = useState({
 for notify to user to get this like website
 */}
 
-{devfastModal && (
+{/*devfastModal && (
   <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
     <div className="bg-white text-black p-8 rounded-2xl text-center max-w-md">
       <h2 className="text-2xl font-bold mb-4">
@@ -226,7 +229,12 @@ for notify to user to get this like website
       
     </div>
   </div>
-)}
+)*/}
+{/**
+ * this is temporary comment this for the notify
+ */}
+
+
 
 
 {/*
