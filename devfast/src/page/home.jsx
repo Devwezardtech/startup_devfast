@@ -356,9 +356,9 @@ export default function DevfastLanding() {
   </div>
 )}
 
-      <footer className="text-center py-6 text-slate-400 text-sm tracking-wide">
-        © {new Date().getFullYear()} Devfast. Built fast. Built right.
-      </footer>
+     <footer className="text-center py-6 text-slate-400 text-sm">
+  Devfast © {new Date().getFullYear()} • Developed by Ejemar Maloloy-on
+</footer>
     </div>
   );
 }
