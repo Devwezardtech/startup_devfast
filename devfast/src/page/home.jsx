@@ -43,11 +43,17 @@ export default function DevfastLanding() {
     go("/project/dashboard"); // make sure this path matches your route
     setMenuOpen(false);
     setShowDeveloperModal(false);
-    }else if (sec.ref) {
-      sec.ref.current.scrollIntoView({ behavior: "smooth" });
-      setMenuOpen(false);
-      setShowDeveloperModal(false); // hide developer when scrolling to other sections
-    } else {
+    } else if (sec.ref) {
+  setMenuOpen(false);
+
+  setTimeout(() => {
+    sec.ref.current?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, 100);
+
+  setShowDeveloperModal(false);
+} else {
       window.scrollTo({ top: 0, behavior: "smooth" });
       setShowDeveloperModal(false);
     }
